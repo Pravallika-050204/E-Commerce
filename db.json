@@ -1,0 +1,530 @@
+{
+  "users": [
+    {
+      "name": "Pravallika",
+      "email": "prav@gmail.com",
+      "password": "123456",
+      "id": "jq9ulnubpIU"
+    },
+    {
+      "name": "Pravallika",
+      "email": "pravs@gmail.com",
+      "password": "Pravallika",
+      "id": "QYeqBKzbHhk"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "Matte Red Lipstick",
+      "description": "High quality customized matte red lipstick perfect for your collection. Exceptional customer reviews.",
+      "price": 38.31,
+      "category": "Makeup",
+      "image": "https://static.vecteezy.com/system/resources/thumbnails/026/704/479/small/red-lipstick-on-dark-background-generative-ai-photo.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Liquid Foundation",
+      "description": "High quality customized liquid foundation perfect for your collection. Exceptional customer reviews.",
+      "price": 51.95,
+      "category": "Makeup",
+      "image": "https://m.media-amazon.com/images/I/61igLn6j8jL._AC_UF1000,1000_QL80_.jpg"
+    },
+    {
+      "id": "3",
+      "title": "HD Concealer",
+      "description": "High quality customized hd concealer perfect for your collection. Exceptional customer reviews.",
+      "price": 29.89,
+      "category": "Makeup",
+      "image": "https://www.lakmeindia.com/cdn/shop/files/preview_images/6824f688305543768e06c18e695fe7bb.thumbnail.0000000000_1024x.jpg?v=1713423384"
+    },
+    {
+      "id": "4",
+      "title": "Waterproof Kajal",
+      "description": "High quality customized waterproof kajal perfect for your collection. Exceptional customer reviews.",
+      "price": 58.1,
+      "category": "Makeup",
+      "image": "https://m.media-amazon.com/images/I/61pRntfCQrL._AC_UF350,350_QL80_.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Mascara Volumizing",
+      "description": "High quality customized mascara volumizing perfect for your collection. Exceptional customer reviews.",
+      "price": 11.92,
+      "category": "Makeup",
+      "image": "https://m.media-amazon.com/images/I/61pqiaAuMNL.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Eyeshadow Palette",
+      "description": "High quality customized eyeshadow palette perfect for your collection. Exceptional customer reviews.",
+      "price": 58.07,
+      "category": "Makeup",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnloqATXU5-__GG8BWZ0ldbW2OyD8aWRxYSA&s"
+    },
+    {
+      "id": "7",
+      "title": "Rose Gold Makeup Brush Set",
+      "description": "High quality customized rose gold makeup brush set perfect for your collection. Exceptional customer reviews.",
+      "price": 11.64,
+      "category": "Makeup",
+      "image": "https://www.jiomart.com/images/product/original/rvtucwb1bz/roslet-makeup-brush-set-10-pcs-premium-synthetic-brushes-rose-gold-cosmetic-brushes-with-travel-bag-product-images-orvtucwb1bz-p595993461-0-202212022128.png?im=Resize=(1000,1000)"
+    },
+    {
+      "id": "8",
+      "title": "Compact Face Powder",
+      "description": "High quality customized compact face powder perfect for your collection. Exceptional customer reviews.",
+      "price": 49.16,
+      "category": "Makeup",
+      "image": "https://cdn.tirabeauty.com/v2/billowing-snowflake-434234/tira-p/wrkr/products/pictures/item/free/resize-w:540/6CoYlDRJan-1183438-1.jpg"
+    },
+    {
+      "id": "9",
+      "title": "White Canvas Sneakers",
+      "description": "High quality customized white canvas sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 60.85,
+      "category": "Sneakers",
+      "image": "https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_640.jpg"
+    },
+    {
+      "id": "10",
+      "title": "Classic Street Sneakers",
+      "description": "High quality customized classic street sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 145.02,
+      "category": "Sneakers",
+      "image": "https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_640.jpg"
+    },
+    {
+      "id": "11",
+      "title": "Chunky Platform Sneakers",
+      "description": "High quality customized chunky platform sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 96.84,
+      "category": "Sneakers",
+      "image": "https://assets.ajio.com/medias/sys_master/root/20240303/Lwkk/65e47b2105ac7d77bb923eb6/-473Wx593H-467130392-white-MODEL.jpg"
+    },
+    {
+      "id": "12",
+      "title": "Grey Running Sneakers",
+      "description": "High quality customized grey running sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 171.54,
+      "category": "Sneakers",
+      "image": "https://rukminim2.flixcart.com/image/480/640/xif0q/shoe/w/z/0/8-new-2503-14581-8-0-vannix-grey-original-imahf9gt4mgb4vsq.jpeg?q=90"
+    },
+    {
+      "id": "13",
+      "title": "Athletic Sports Sneakers",
+      "description": "High quality customized athletic sports sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 72.79,
+      "category": "Sneakers",
+      "image": "https://rukminim2.flixcart.com/image/480/640/xif0q/shoe/w/z/0/8-new-2503-14581-8-0-vannix-grey-original-imahf9gt4mgb4vsq.jpeg?q=90"
+    },
+    {
+      "id": "14",
+      "title": "Lightweight Runner Shoes",
+      "description": "High quality customized lightweight runner shoes perfect for your collection. Exceptional customer reviews.",
+      "price": 84.07,
+      "category": "Sneakers",
+      "image": "https://rukminim2.flixcart.com/image/480/640/xif0q/shoe/w/z/0/8-new-2503-14581-8-0-vannix-grey-original-imahf9gt4mgb4vsq.jpeg?q=90"
+    },
+    {
+      "id": "15",
+      "title": "Premium Leather Sneakers",
+      "description": "High quality customized premium leather sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 109.74,
+      "category": "Sneakers",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8CRsF7-b-qbd421n8WD5YV7bF7u75iUDH8w&s"
+    },
+    {
+      "id": "16",
+      "title": "Slip-On Casual Sneakers",
+      "description": "High quality customized slip-on casual sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 70.69,
+      "category": "Sneakers",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8CRsF7-b-qbd421n8WD5YV7bF7u75iUDH8w&s"
+    },
+    {
+      "id": "17",
+      "title": "Women's Casual Sneakers",
+      "description": "High quality customized women's casual sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 186.23,
+      "category": "Sneakers",
+      "image": "https://static.vecteezy.com/system/resources/previews/042/585/850/non_2x/ai-generated-women-sneaker-casual-female-sneaker-casual-sneaker-women-sneaker-transparent-background-png.png"
+    },
+    {
+      "id": "18",
+      "title": "Trendy High-Top Sneakers",
+      "description": "High quality customized trendy high-top sneakers perfect for your collection. Exceptional customer reviews.",
+      "price": 100.19,
+      "category": "Sneakers",
+      "image": "https://images.meesho.com/images/products/251184696/mkb0t_512.jpg"
+    },
+    {
+      "id": "19",
+      "title": "Leather Handbag",
+      "description": "High quality customized leather handbag perfect for your collection. Exceptional customer reviews.",
+      "price": 94.72,
+      "category": "Bags",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVBpBUYQBtr2t1ESS8SbhRffKug9La2DJoFQ&s"
+    },
+    {
+      "id": "20",
+      "title": "Designer Crossbody Bag",
+      "description": "High quality customized designer crossbody bag perfect for your collection. Exceptional customer reviews.",
+      "price": 53.54,
+      "category": "Bags",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVBpBUYQBtr2t1ESS8SbhRffKug9La2DJoFQ&s"
+    },
+    {
+      "id": "21",
+      "title": "Travel Duffel Bag",
+      "description": "High quality customized travel duffel bag perfect for your collection. Exceptional customer reviews.",
+      "price": 104.92,
+      "category": "Bags",
+      "image": "https://t4.ftcdn.net/jpg/02/02/39/07/360_F_202390749_8T273Qalaj7HwjvW6W4VSiUsNb753vd2.jpg"
+    },
+    {
+      "id": "22",
+      "title": "Vintage Tote Bag",
+      "description": "High quality customized vintage tote bag perfect for your collection. Exceptional customer reviews.",
+      "price": 52.53,
+      "category": "Bags",
+      "image": "https://i.pinimg.com/474x/06/31/03/063103f92228a94c196b2ee69342b169.jpg"
+    },
+    {
+      "id": "23",
+      "title": "Elegant Clutch Bag",
+      "description": "High quality customized elegant clutch bag perfect for your collection. Exceptional customer reviews.",
+      "price": 225.6,
+      "category": "Bags",
+      "image": "https://images-static.nykaa.com/media/catalog/product/7/f/7f8382dB0CGTXCH1G_1.jpg?tr=w-500"
+    },
+    {
+      "id": "24",
+      "title": "Kids Rolling Suitcase",
+      "description": "High quality customized kids rolling suitcase perfect for your collection. Exceptional customer reviews.",
+      "price": 197.2,
+      "category": "Bags",
+      "image": "https://rukmini1.flixcart.com/image/1500/1500/xif0q/suitcase/6/u/z/41-16-inch-4-wheeled-suitcase-for-kids-children-suitcase-kid-original-imahf7t2ma88rgtd.jpeg?q=70"
+    },
+    {
+      "id": "25",
+      "title": "Laptop Backpack",
+      "description": "High quality customized laptop backpack perfect for your collection. Exceptional customer reviews.",
+      "price": 141.46,
+      "category": "Bags",
+      "image": "https://media-ik.croma.com/prod/https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Computer%20Accessories%20and%20Tablets%20Accessories/Images/235081_0_xzqhph.png"
+    },
+    {
+      "id": "26",
+      "title": "Waterproof Tech Backpack",
+      "description": "High quality customized waterproof tech backpack perfect for your collection. Exceptional customer reviews.",
+      "price": 224.99,
+      "category": "Bags",
+      "image": "https://media-ik.croma.com/prod/https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Computer%20Accessories%20and%20Tablets%20Accessories/Images/235081_0_xzqhph.png"
+    },
+    {
+      "id": "27",
+      "title": "Everyday Backpack",
+      "description": "High quality customized everyday backpack perfect for your collection. Exceptional customer reviews.",
+      "price": 225.08,
+      "category": "Bags",
+      "image": "https://media-ik.croma.com/prod/https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Computer%20Accessories%20and%20Tablets%20Accessories/Images/235081_0_xzqhph.png"
+    },
+    {
+      "id": "28",
+      "title": "Diamond Engagement Ring",
+      "description": "High quality customized diamond engagement ring perfect for your collection. Exceptional customer reviews.",
+      "price": 298.66,
+      "category": "Accessories",
+      "image": "https://media.istockphoto.com/id/157337569/photo/diamond-ring.jpg?s=612x612&w=0&k=20&c=iSUEboNxpwqqrBooH8PMVUa4DtiWZP1gW0OsctrfTN4="
+    },
+    {
+      "id": "29",
+      "title": "Gold Chain Necklace",
+      "description": "High quality customized gold chain necklace perfect for your collection. Exceptional customer reviews.",
+      "price": 27.79,
+      "category": "Accessories",
+      "image": "https://t3.ftcdn.net/jpg/05/64/35/80/360_F_564358021_KBRaemBSj9FGjZlupRQsloTJIMo1MATC.jpg"
+    },
+    {
+      "id": "30",
+      "title": "Elegant Pendant",
+      "description": "High quality customized elegant pendant perfect for your collection. Exceptional customer reviews.",
+      "price": 122.35,
+      "category": "Accessories",
+      "image": "https://cdn.pixabay.com/photo/2018/11/02/16/50/gold-jewelry-3790542_640.jpg"
+    },
+    {
+      "id": "31",
+      "title": "Classic Analog Watch",
+      "description": "High quality customized classic analog watch perfect for your collection. Exceptional customer reviews.",
+      "price": 171.57,
+      "category": "Accessories",
+      "image": "https://m.media-amazon.com/images/I/61ij+SteFCL._AC_UY300_.jpg"
+    },
+    {
+      "id": "32",
+      "title": "Designer Sunglasses",
+      "description": "High quality customized designer sunglasses perfect for your collection. Exceptional customer reviews.",
+      "price": 84.06,
+      "category": "Accessories",
+      "image": "https://www.shadyshack.in/cdn/shop/files/DSL-9519_copy_70a81146-c6d2-4ed9-9125-d3a2c75bc69f.jpg?v=1729967895"
+    },
+    {
+      "id": "33",
+      "title": "Multi-Tier Silver Earrings",
+      "description": "High quality customized multi-tier silver earrings perfect for your collection. Exceptional customer reviews.",
+      "price": 239.18,
+      "category": "Accessories",
+      "image": "https://rudradhan.com/cdn/shop/files/multi-tier-silver-earrings.jpg?v=1757080291&width=2048"
+    },
+    {
+      "id": "34",
+      "title": "Bridal Silver Earrings",
+      "description": "High quality customized bridal silver earrings perfect for your collection. Exceptional customer reviews.",
+      "price": 106.53,
+      "category": "Accessories",
+      "image": "https://rudradhan.com/cdn/shop/files/multi-tier-silver-earrings.jpg?v=1757080291&width=2048"
+    },
+    {
+      "id": "35",
+      "title": "Dangling Silver Earrings",
+      "description": "High quality customized dangling silver earrings perfect for your collection. Exceptional customer reviews.",
+      "price": 191.98,
+      "category": "Accessories",
+      "image": "https://rudradhan.com/cdn/shop/files/multi-tier-silver-earrings.jpg?v=1757080291&width=2048"
+    },
+    {
+      "id": "36",
+      "title": "Cute Fox Soft Toy",
+      "description": "High quality customized cute fox soft toy perfect for your collection. Exceptional customer reviews.",
+      "price": 15.28,
+      "category": "Plush Toys",
+      "image": "https://mumuso.co.in/cdn/shop/files/WhatsApp_Image_2025-07-12_at_15.25.34.jpg?v=1752314367"
+    },
+    {
+      "id": "37",
+      "title": "Baby Fox Plushie",
+      "description": "High quality customized baby fox plushie perfect for your collection. Exceptional customer reviews.",
+      "price": 15.64,
+      "category": "Plush Toys",
+      "image": "https://m.media-amazon.com/images/I/51gkSzyMR9L._SX679_.jpg"
+    },
+    {
+      "id": "38",
+      "title": "Cuddly Fox Companion",
+      "description": "High quality customized cuddly fox companion perfect for your collection. Exceptional customer reviews.",
+      "price": 36.48,
+      "category": "Plush Toys",
+      "image": "https://rukminim2.flixcart.com/image/1280/1280/xif0q/stuffed-toy/s/j/h/pikachu-soft-stuffed-plush-25-shreeji-gift-original-imahm5fypucrhk4v.jpeg?q=90"
+    },
+    {
+      "id": "39",
+      "title": "Soft Plush Fox",
+      "description": "High quality customized soft plush fox perfect for your collection. Exceptional customer reviews.",
+      "price": 15.19,
+      "category": "Plush Toys",
+      "image": "https://www.ikea.com/in/en/images/products/blahaj-soft-toy-baby-shark__0716615_pe730956_s5.jpg?f=xl"
+    },
+    {
+      "id": "40",
+      "title": "Hug Fox Mini Toy",
+      "description": "High quality customized hug fox mini toy perfect for your collection. Exceptional customer reviews.",
+      "price": 24.57,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "41",
+      "title": "Forest Friend Fox",
+      "description": "High quality customized forest friend fox perfect for your collection. Exceptional customer reviews.",
+      "price": 17.41,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "42",
+      "title": "Premium Fox Soft Toy",
+      "description": "High quality customized premium fox soft toy perfect for your collection. Exceptional customer reviews.",
+      "price": 37.59,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "43",
+      "title": "Toddler Fox Plush",
+      "description": "High quality customized toddler fox plush perfect for your collection. Exceptional customer reviews.",
+      "price": 40.4,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "44",
+      "title": "Fox Decorative Toy",
+      "description": "High quality customized fox decorative toy perfect for your collection. Exceptional customer reviews.",
+      "price": 49.81,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "45",
+      "title": "Giant Hugging Fox",
+      "description": "High quality customized giant hugging fox perfect for your collection. Exceptional customer reviews.",
+      "price": 21.96,
+      "category": "Plush Toys",
+      "image": "https://teddydaddy.in/wp-content/uploads/Cute-FOX-Baby-Soft-Toy-Soft-Toy-Plush-Teddy-Daddy-jpg.webp"
+    },
+    {
+      "id": "46",
+      "title": "Red Stiletto Heels",
+      "description": "High quality customized red stiletto heels perfect for your collection. Exceptional customer reviews.",
+      "price": 146.7,
+      "category": "Footwear",
+      "image": "https://c8.alamy.com/comp/AAFNN3/hpa78574-red-color-ladies-high-heeled-footwear-stiletto-fashion-elegant-AAFNN3.jpg"
+    },
+    {
+      "id": "47",
+      "title": "Elegant Red Pumps",
+      "description": "High quality customized elegant red pumps perfect for your collection. Exceptional customer reviews.",
+      "price": 152.71,
+      "category": "Footwear",
+      "image": "https://c8.alamy.com/comp/AAFNN3/hpa78574-red-color-ladies-high-heeled-footwear-stiletto-fashion-elegant-AAFNN3.jpg"
+    },
+    {
+      "id": "48",
+      "title": "Designer Red Heels",
+      "description": "High quality customized designer red heels perfect for your collection. Exceptional customer reviews.",
+      "price": 54.27,
+      "category": "Footwear",
+      "image": "https://www.mytheresa.com/image/2310/2612/100/b5/P01070969.jpg"
+    },
+    {
+      "id": "49",
+      "title": "Pink Block Heel Sandals",
+      "description": "High quality customized pink block heel sandals perfect for your collection. Exceptional customer reviews.",
+      "price": 101.04,
+      "category": "Footwear",
+      "image": "https://www.jiomart.com/images/product/original/rvxw20r3ly/fabycarry-women-s-fashion-sandals-heels-for-girls-heels-for-women-women-footwear-block-heel-black-heeled-sandals-for-women-pink-39-product-images-rvxw20r3ly-0-202401201949.jpg?im=Resize=(500,630)"
+    },
+    {
+      "id": "50",
+      "title": "Gold Evening Heels",
+      "description": "High quality customized gold evening heels perfect for your collection. Exceptional customer reviews.",
+      "price": 105.09,
+      "category": "Footwear",
+      "image": "https://assets.ajio.com/medias/sys_master/root/20231013/qXxj/6529701dafa4cf41f5424be1/-473Wx593H-466703128-gold-MODEL.jpg"
+    }
+  ],
+  "wishlists": [
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "2",
+      "product": {
+        "id": "2",
+        "title": "Liquid Foundation",
+        "description": "High quality customized liquid foundation perfect for your collection. Exceptional customer reviews.",
+        "price": 51.95,
+        "category": "Makeup",
+        "image": "https://m.media-amazon.com/images/I/61igLn6j8jL._AC_UF1000,1000_QL80_.jpg"
+      },
+      "id": "x6c80uPtNMU"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "3",
+      "product": {
+        "id": "3",
+        "title": "HD Concealer",
+        "description": "High quality customized hd concealer perfect for your collection. Exceptional customer reviews.",
+        "price": 29.89,
+        "category": "Makeup",
+        "image": "https://www.lakmeindia.com/cdn/shop/files/preview_images/6824f688305543768e06c18e695fe7bb.thumbnail.0000000000_1024x.jpg?v=1713423384"
+      },
+      "id": "sZANhDpioa0"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "1",
+      "product": {
+        "id": "1",
+        "title": "Matte Red Lipstick",
+        "description": "High quality customized matte red lipstick perfect for your collection. Exceptional customer reviews.",
+        "price": 38.31,
+        "category": "Makeup",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/026/704/479/small/red-lipstick-on-dark-background-generative-ai-photo.jpg"
+      },
+      "id": "Bi4V763X1as"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "4",
+      "product": {
+        "id": "4",
+        "title": "Waterproof Kajal",
+        "description": "High quality customized waterproof kajal perfect for your collection. Exceptional customer reviews.",
+        "price": 58.1,
+        "category": "Makeup",
+        "image": "https://m.media-amazon.com/images/I/61pRntfCQrL._AC_UF350,350_QL80_.jpg"
+      },
+      "id": "-e-t4Ubthg4"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "5",
+      "product": {
+        "id": "5",
+        "title": "Mascara Volumizing",
+        "description": "High quality customized mascara volumizing perfect for your collection. Exceptional customer reviews.",
+        "price": 11.92,
+        "category": "Makeup",
+        "image": "https://m.media-amazon.com/images/I/61pqiaAuMNL.jpg"
+      },
+      "id": "OkaXJhwNL6U"
+    }
+  ],
+  "carts": [
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "1",
+      "quantity": 1,
+      "product": {
+        "id": "1",
+        "title": "Matte Red Lipstick",
+        "description": "High quality customized matte red lipstick perfect for your collection. Exceptional customer reviews.",
+        "price": 38.31,
+        "category": "Makeup",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/026/704/479/small/red-lipstick-on-dark-background-generative-ai-photo.jpg"
+      },
+      "id": "i0Bz25UYuPE"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "2",
+      "quantity": 1,
+      "product": {
+        "id": "2",
+        "title": "Liquid Foundation",
+        "description": "High quality customized liquid foundation perfect for your collection. Exceptional customer reviews.",
+        "price": 51.95,
+        "category": "Makeup",
+        "image": "https://m.media-amazon.com/images/I/61igLn6j8jL._AC_UF1000,1000_QL80_.jpg"
+      },
+      "id": "GbXYL5vwqFM"
+    },
+    {
+      "userId": "QYeqBKzbHhk",
+      "productId": "1",
+      "quantity": 1,
+      "product": {
+        "id": "1",
+        "title": "Matte Red Lipstick",
+        "description": "High quality customized matte red lipstick perfect for your collection. Exceptional customer reviews.",
+        "price": 38.31,
+        "category": "Makeup",
+        "image": "https://static.vecteezy.com/system/resources/thumbnails/026/704/479/small/red-lipstick-on-dark-background-generative-ai-photo.jpg"
+      },
+      "id": "29hJcwHn0h0"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

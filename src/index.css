@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f0f0;
+  --bg-card: #e9ecef; /* Light gray for card */
+  --text-primary: #000000;
+  --text-secondary: #495057;
+  --border-color: #dee2e6;
+  --accent-color: #000000;
+  --accent-hover: #333333;
+  --accent-text: #ffffff;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #222222; /* Light black for card */
+  --text-primary: #ffffff; 
+  --text-secondary: #adb5bd;
+  --border-color: #333333;
+  --accent-color: #ffffff;
+  --accent-hover: #dddddd;
+  --accent-text: #000000;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+html {
+  font-size: 18px; /* Increases all components universally */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  overscroll-behavior-y: none;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reset Bootstrap Colors to Monochrome */
+.btn-primary {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--accent-text) !important;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover) !important;
+  border-color: var(--accent-hover) !important;
+}
+
+.btn-outline-primary {
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  background: transparent !important;
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent-color) !important;
+  color: var(--accent-text) !important;
+}
+
+.card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--card-shadow) !important;
+  border-radius: 12px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+  overflow: hidden;
+  color: var(--text-primary) !important;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] .card:hover {
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15); /* Lighter shadow for dark mode hover */
+}
+
+/* Form Inputs globally forced to White background + Black text */
+.form-control, .form-select {
+  background-color: #ffffff !important;
+  border: 1px solid #ced4da !important;
+  color: #000000 !important;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+/* Force placeholders to be visible and black/gray */
+.form-control::placeholder {
+  color: #495057 !important;
+  opacity: 1;
+}
+
+.form-control:focus, .form-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--border-color) !important;
+  border-color: #000000 !important;
+}
+
+/* Force Navbar to always be black background with white text */
+.navbar {
+  background-color: #000000 !important;
+  border-bottom: 2px solid #333333;
+}
+
+.navbar .navbar-brand, .navbar .nav-link {
+  color: #ffffff !important;
+  font-size: 1.25rem !important; /* Larger text for navbar */
+}
+
+.navbar .nav-link:hover {
+  color: #bbbbbb !important;
+}
+
+.navbar svg {
+  color: #ffffff !important;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--text-secondary);
+}
+
+.badge {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* Custom range slider for monochrome */
+input[type=range] {
+  -webkit-appearance: none;
+  background: var(--bg-secondary);
+  height: 6px;
+  border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  margin-top: -5px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: var(--border-color);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
