@@ -14,11 +14,11 @@ const Cart = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/carts?userId=${user.id}`)
+      fetch(`https://e-commerce-zjcq.onrender.com/carts?userId=${user.id}`)
         .then(res => res.json())
         .then(data => setCartItems(data));
 
-      fetch(`http://localhost:5000/wishlists?userId=${user.id}`)
+      fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
         .then(res => res.json())
         .then(data => setWishlists(data));
     }
@@ -28,7 +28,7 @@ const Cart = () => {
     if (newQuantity < 1) return;
     const item = cartItems.find(c => c.id === id);
     if (!item) return;
-    await fetch(`http://localhost:5000/carts/${id}`, {
+    await fetch(`https://e-commerce-zjcq.onrender.com/carts/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...item, quantity: newQuantity }),
@@ -37,7 +37,7 @@ const Cart = () => {
   };
 
   const removeItem = async (id) => {
-    await fetch(`http://localhost:5000/carts/${id}`, { method: 'DELETE' });
+    await fetch(`https://e-commerce-zjcq.onrender.com/carts/${id}`, { method: 'DELETE' });
     setCartItems(cartItems.filter(c => c.id !== id));
     window.dispatchEvent(new Event('cartUpdated'));
   };
@@ -47,7 +47,7 @@ const Cart = () => {
     try {
       await Promise.all(
         cartItems.map(item =>
-          fetch(`http://localhost:5000/carts/${item.id}`, { method: 'DELETE' })
+          fetch(`https://e-commerce-zjcq.onrender.com/carts/${item.id}`, { method: 'DELETE' })
         )
       );
       setCartItems([]);
@@ -64,10 +64,10 @@ const Cart = () => {
     if (!user) return navigate('/login');
     const existing = wishlists.find(w => w.productId === product.id);
     if (existing) {
-      await fetch(`http://localhost:5000/wishlists/${existing.id}`, { method: 'DELETE' });
+      await fetch(`https://e-commerce-zjcq.onrender.com/wishlists/${existing.id}`, { method: 'DELETE' });
       setWishlists(wishlists.filter(w => w.id !== existing.id));
     } else {
-      const res = await fetch('http://localhost:5000/wishlists', {
+      const res = await fetch('https://e-commerce-zjcq.onrender.com/wishlists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, product }),
@@ -81,12 +81,12 @@ const Cart = () => {
   /* ── Add to cart from modal ── */
   const handleAddToCart = async (product) => {
     if (!user) return navigate('/login');
-    const res = await fetch(`http://localhost:5000/carts?userId=${user.id}&productId=${product.id}`);
+    const res = await fetch(`https://e-commerce-zjcq.onrender.com/carts?userId=${user.id}&productId=${product.id}`);
     const existing = await res.json();
     if (existing.length > 0) {
       toast.error('Product is already in your cart!');
     } else {
-      const newRes = await fetch('http://localhost:5000/carts', {
+      const newRes = await fetch('https://e-commerce-zjcq.onrender.com/carts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, quantity: 1, product }),

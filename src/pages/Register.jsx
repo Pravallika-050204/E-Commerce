@@ -3,9 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const Register = () => {
-  const [name,            setName]            = useState('');
-  const [email,           setEmail]           = useState('');
-  const [password,        setPassword]        = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Register = () => {
       return toast.error('Passwords do not match');
     }
     try {
-      const checkRes  = await fetch(`http://localhost:5000/users?email=${email}`);
+      const checkRes = await fetch(`https://e-commerce-zjcq.onrender.com/users?email=${email}`);
       const checkData = await checkRes.json();
       if (checkData.length > 0) {
         setEmail('');
@@ -25,7 +25,7 @@ const Register = () => {
         setConfirmPassword('');
         return toast.error('Email already registered');
       }
-      await fetch('http://localhost:5000/users', {
+      await fetch('https://e-commerce-zjcq.onrender.com/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
@@ -64,10 +64,10 @@ const Register = () => {
 
           <form onSubmit={handleSubmit}>
             {[
-              { label: 'Full Name',         type: 'text',     placeholder: 'John Doe',          value: name,            setter: setName },
-              { label: 'Email address',     type: 'email',    placeholder: 'name@example.com',  value: email,           setter: setEmail },
-              { label: 'Password',          type: 'password', placeholder: 'Enter password',    value: password,        setter: setPassword },
-              { label: 'Confirm Password',  type: 'password', placeholder: 'Confirm password',  value: confirmPassword, setter: setConfirmPassword },
+              { label: 'Full Name', type: 'text', placeholder: 'John Doe', value: name, setter: setName },
+              { label: 'Email address', type: 'email', placeholder: 'name@example.com', value: email, setter: setEmail },
+              { label: 'Password', type: 'password', placeholder: 'Enter password', value: password, setter: setPassword },
+              { label: 'Confirm Password', type: 'password', placeholder: 'Confirm password', value: confirmPassword, setter: setConfirmPassword },
             ].map(({ label, type, placeholder, value, setter }, i, arr) => (
               <div className={i < arr.length - 1 ? 'mb-3' : 'mb-4'} key={label}>
                 <label

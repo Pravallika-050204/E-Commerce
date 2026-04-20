@@ -4,17 +4,17 @@ import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const [email, setEmail]       = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login }  = useAuth();
-  const navigate   = useNavigate();
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Fetch by email only — json-server v1 multi-param filtering is unreliable.
       // Password comparison is done client-side.
-      const res  = await fetch(`http://localhost:5000/users?email=${encodeURIComponent(email)}`);
+      const res = await fetch(`https://e-commerce-zjcq.onrender.com/users?email=${encodeURIComponent(email)}`);
       const data = await res.json();
       const matched = data.find(u => u.password === password);
       if (matched) {

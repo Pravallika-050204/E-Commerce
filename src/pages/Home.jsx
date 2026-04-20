@@ -25,12 +25,12 @@ const Home = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch('http://localhost:5000/products?_limit=3')
+    fetch('https://e-commerce-zjcq.onrender.com/products?_limit=3')
       .then(r => r.json())
       .then(data => setFeaturedProducts(data));
 
     if (user) {
-      fetch(`http://localhost:5000/wishlists?userId=${user.id}`)
+      fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
         .then(r => r.json())
         .then(data => setWishlists(data));
     }
@@ -51,10 +51,10 @@ const Home = () => {
     if (!user) return;
     const existing = wishlists.find(w => w.productId === product.id);
     if (existing) {
-      await fetch(`http://localhost:5000/wishlists/${existing.id}`, { method: 'DELETE' });
+      await fetch(`https://e-commerce-zjcq.onrender.com/wishlists/${existing.id}`, { method: 'DELETE' });
       setWishlists(wishlists.filter(w => w.id !== existing.id));
     } else {
-      const res = await fetch('http://localhost:5000/wishlists', {
+      const res = await fetch('https://e-commerce-zjcq.onrender.com/wishlists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, product }),
@@ -67,12 +67,12 @@ const Home = () => {
 
   const handleAddToCart = async (product) => {
     if (!user) return;
-    const res = await fetch(`http://localhost:5000/carts?userId=${user.id}&productId=${product.id}`);
+    const res = await fetch(`https://e-commerce-zjcq.onrender.com/carts?userId=${user.id}&productId=${product.id}`);
     const existing = await res.json();
     if (existing.length > 0) {
       toast.error('Product is already in your cart!');
     } else {
-      await fetch('http://localhost:5000/carts', {
+      await fetch('https://e-commerce-zjcq.onrender.com/carts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, quantity: 1, product }),

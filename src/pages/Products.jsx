@@ -21,11 +21,11 @@ const Products = () => {
   const productsTopRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch('https://e-commerce-zjcq.onrender.com/products')
       .then(res => res.json())
       .then(data => setProducts(data));
     if (user) {
-      fetch(`http://localhost:5000/wishlists?userId=${user.id}`)
+      fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
         .then(res => res.json())
         .then(data => setWishlists(data));
     }
@@ -55,10 +55,10 @@ const Products = () => {
     if (!user) return;
     const existing = wishlists.find(w => w.productId === product.id);
     if (existing) {
-      await fetch(`http://localhost:5000/wishlists/${existing.id}`, { method: 'DELETE' });
+      await fetch(`https://e-commerce-zjcq.onrender.com/wishlists/${existing.id}`, { method: 'DELETE' });
       setWishlists(wishlists.filter(w => w.id !== existing.id));
     } else {
-      const res = await fetch('http://localhost:5000/wishlists', {
+      const res = await fetch('https://e-commerce-zjcq.onrender.com/wishlists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, product }),
@@ -71,12 +71,12 @@ const Products = () => {
 
   const handleAddToCart = async (product) => {
     if (!user) return;
-    const res = await fetch(`http://localhost:5000/carts?userId=${user.id}&productId=${product.id}`);
+    const res = await fetch(`https://e-commerce-zjcq.onrender.com/carts?userId=${user.id}&productId=${product.id}`);
     const existing = await res.json();
     if (existing.length > 0) {
       toast.error('Product is already in your cart!');
     } else {
-      await fetch('http://localhost:5000/carts', {
+      await fetch('https://e-commerce-zjcq.onrender.com/carts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, productId: product.id, quantity: 1, product }),
@@ -96,26 +96,26 @@ const Products = () => {
         } else {
           const term = searchTerm.toLowerCase().trim();
           if (p.title.toLowerCase().includes(term) || p.category.toLowerCase().includes(term)) matchesSearch = true;
-          const isShoe   = ['shoe','shoes','sneaker','heel','heels'].some(t => term.includes(t));
-          const isToy    = ['toy','toys','plush','plushy','plushies'].some(t => term.includes(t));
-          const isMakeup = ['makeup','cosmetic','lipstick','lipstic','kajal','face','foundation','concealer'].some(t => term.includes(t));
-          const isBag    = ['bag','bags','backpack','tote','suitcase'].some(t => term.includes(t));
-          if (isShoe   && (p.category === 'Sneakers' || p.category === 'Footwear')) matchesSearch = true;
-          if (isToy    && p.category === 'Plush Toys') matchesSearch = true;
-          if (isMakeup && p.category === 'Makeup')     matchesSearch = true;
-          if (isBag    && p.category === 'Bags')        matchesSearch = true;
+          const isShoe = ['shoe', 'shoes', 'sneaker', 'heel', 'heels'].some(t => term.includes(t));
+          const isToy = ['toy', 'toys', 'plush', 'plushy', 'plushies'].some(t => term.includes(t));
+          const isMakeup = ['makeup', 'cosmetic', 'lipstick', 'lipstic', 'kajal', 'face', 'foundation', 'concealer'].some(t => term.includes(t));
+          const isBag = ['bag', 'bags', 'backpack', 'tote', 'suitcase'].some(t => term.includes(t));
+          if (isShoe && (p.category === 'Sneakers' || p.category === 'Footwear')) matchesSearch = true;
+          if (isToy && p.category === 'Plush Toys') matchesSearch = true;
+          if (isMakeup && p.category === 'Makeup') matchesSearch = true;
+          if (isBag && p.category === 'Bags') matchesSearch = true;
         }
         const matchesPrice = p.price >= priceRange[0] && p.price <= priceRange[1];
         return matchesCategory && matchesSearch && matchesPrice;
       })
       .sort((a, b) => {
-        if (sort === 'price-asc')  return a.price - b.price;
+        if (sort === 'price-asc') return a.price - b.price;
         if (sort === 'price-desc') return b.price - a.price;
         return a.id - b.id;
       });
   }, [products, categoryId, searchTerm, priceRange, sort]);
 
-  const totalPages      = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const currentProducts = filteredProducts.slice(
     (currentPage - 1) * productsPerPage,
     currentPage * productsPerPage
