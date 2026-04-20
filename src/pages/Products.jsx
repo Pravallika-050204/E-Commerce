@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [wishlists, setWishlists] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { categoryId } = useParams();
   const { user } = useAuth();
@@ -21,9 +22,13 @@ const Products = () => {
   const productsTopRef = useRef(null);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch('https://e-commerce-zjcq.onrender.com/products')
       .then(res => res.json())
-      .then(data => setProducts(data));
+      .then(data => {
+        setProducts(data);
+        setIsLoading(false);
+      });
     if (user) {
       fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
         .then(res => res.json())
@@ -231,7 +236,15 @@ const Products = () => {
 
         {/* Product grid */}
         <div className="col-12 col-lg-9 col-xl-10">
-          {currentProducts.length > 0 ? (
+          {isLoading ? (
+            <div className="row g-3 g-md-4 row-cols-1 row-cols-sm-2 row-cols-xl-3 mb-4">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div className="col" key={i}>
+                  <div className="card shadow-sm border-0 rounded-4 p-3 skeleton" style={{ height: '350px' }}></div>
+                </div>
+              ))}
+            </div>
+          ) : currentProducts.length > 0 ? (
             <>
               {/* Anchor element: scroll target for pagination */}
               <div ref={productsTopRef} style={{ scrollMarginTop: 'clamp(70px, 10vh, 90px)' }} />

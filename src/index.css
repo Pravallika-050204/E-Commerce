@@ -768,3 +768,25 @@ input[type=range]::-webkit-slider-runnable-track {
   padding-right: var(--page-px);
   width: 100%;
 }
+
+@keyframes skeleton-pulse {
+  0% { background-color: var(--border-color); }
+  50% { background-color: #d3d3d3; }
+  100% { background-color: var(--border-color); }
+}
+
+.skeleton {
+  background-color: var(--border-color);
+  border-radius: 8px;
+  animation: skeleton-pulse 1.5s infinite ease-in-out;
+  min-height: 240px;
+  width: 100%;
+}
+[data-theme='dark'] .skeleton {
+  background-color: #333;
+}
+[data-theme='dark'] @keyframes skeleton-pulse {
+  0% { background-color: #333; }
+  50% { background-color: #444; }
+  100% { background-color: #333; }
+}

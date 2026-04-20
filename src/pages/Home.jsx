@@ -17,11 +17,18 @@ const CATEGORIES = [
   { label: '💍 Accessories', to: '/category/Accessories' },
 ];
 
+const HERO_IMAGES = [
+  "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&auto=format&fit=crop&q=90",
+  "https://plus.unsplash.com/premium_photo-1664392147011-2a720f214e01?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGFuZCUyMGJhZ3N8ZW58MHx8MHx8fDA%3D",
+  "https://images.unsplash.com/photo-1596462502278-27bfdc403348?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFrZXVwfGVufDB8fDB8fHww"
+];
+
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [wishlists, setWishlists] = useState([]);
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
+  const [currentImageIdx, setCurrentImageIdx] = useState(0);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -46,6 +53,13 @@ const Home = () => {
       return () => clearTimeout(timeout);
     }
   }, [index]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIdx(prev => (prev + 1) % HERO_IMAGES.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleToggleWishlist = async (product) => {
     if (!user) return;
@@ -128,12 +142,25 @@ const Home = () => {
 
         <div className="hero-image-wrap">
           <div className="hero-image-ring" aria-hidden="true" />
-          <img
-            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&auto=format&fit=crop&q=90"
-            alt="Woman holding shopping bags"
-            className="hero-image"
-            loading="eager"
-          />
+          {HERO_IMAGES.map((imgSrc, i) => (
+            <img
+              key={imgSrc}
+              src={imgSrc}
+              alt={`Slide ${i + 1}`}
+              className={`hero-image ${i === currentImageIdx ? 'hero-img-visible' : 'hero-img-hidden'}`}
+              loading="eager"
+              style={{
+                position: i === 0 ? 'relative' : 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                opacity: i === currentImageIdx ? 1 : 0,
+                transition: 'opacity 0.5s ease-in-out',
+                zIndex: i === currentImageIdx ? 1 : 0
+              }}
+            />
+          ))}
           <div className="hero-badge">
             <span className="hero-badge-icon">✨</span>
             <div>
