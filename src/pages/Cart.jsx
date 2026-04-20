@@ -180,6 +180,7 @@ const Cart = () => {
                     wishlists={wishlists}
                     onToggleWishlist={handleToggleWishlist}
                     onAddToCart={handleAddToCart}
+                    updateQuantity={updateQuantity}
                   />
 
                   {/* Qty controls */}
@@ -279,7 +280,7 @@ const Cart = () => {
    On click → opens a full ProductCard detail modal.
    This gives the user the same detail view as on Products page.
 ────────────────────────────────────────────────────────── */
-const CartProductPreview = ({ item, wishlists, onToggleWishlist, onAddToCart }) => {
+const CartProductPreview = ({ item, wishlists, onToggleWishlist, onAddToCart, updateQuantity }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -335,8 +336,10 @@ const CartProductPreview = ({ item, wishlists, onToggleWishlist, onAddToCart }) 
         <ProductCard
           product={item.product}
           isWishlisted={wishlists.some(w => w.productId === item.product.id)}
+          cartItem={item}
           onToggleWishlist={onToggleWishlist}
           onAddToCart={onAddToCart}
+          onUpdateQuantity={updateQuantity}
           autoOpenModal={true}
           onModalClose={() => setShowModal(false)}
         />

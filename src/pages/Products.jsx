@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [wishlists, setWishlists] = useState([]);
+  const [carts, setCarts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { categoryId } = useParams();
@@ -21,6 +22,20 @@ const Products = () => {
   // Ref to scroll back to products top on page change
   const productsTopRef = useRef(null);
 
+  const fetchUserData = () => {
+    if (user) {
+      fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
+        .then(res => res.json())
+        .then(data => setWishlists(data));
+      fetch(`https://e-commerce-zjcq.onrender.com/carts?userId=${user.id}`)
+        .then(res => res.json())
+        .then(data => setCarts(data));
+    } else {
+      setWishlists([]);
+      setCarts([]);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
     fetch('https://e-commerce-zjcq.onrender.com/products')
@@ -29,11 +44,12 @@ const Products = () => {
         setProducts(data);
         setIsLoading(false);
       });
-    if (user) {
-      fetch(`https://e-commerce-zjcq.onrender.com/wishlists?userId=${user.id}`)
-        .then(res => res.json())
-        .then(data => setWishlists(data));
-    }
+  }, []);
+
+  useEffect(() => {
+    fetchUserData();
+    window.addEventListener('cartUpdated', fetchUserData);
+    return () => window.removeEventListener('cartUpdated', fetchUserData);
   }, [user]);
 
   useEffect(() => {
@@ -89,6 +105,19 @@ const Products = () => {
       window.dispatchEvent(new Event('cartUpdated'));
       toast.success(`${product.title} added to Cart!`);
     }
+  };
+
+  const handleUpdateCartQuantity = async (cartItemId, newQuantity) => {
+    if (newQuantity <= 0) {
+      await fetch(`https://e-commerce-zjcq.onrender.com/carts/${cartItemId}`, { method: 'DELETE' });
+    } else {
+      await fetch(`https://e-commerce-zjcq.onrender.com/carts/${cartItemId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity: newQuantity }),
+      });
+    }
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const filteredProducts = useMemo(() => {
@@ -254,8 +283,10 @@ const Products = () => {
                     <ProductCard
                       product={product}
                       isWishlisted={wishlists.some(w => w.productId === product.id)}
+                      cartItem={carts.find(c => c.productId === product.id)}
                       onToggleWishlist={handleToggleWishlist}
                       onAddToCart={handleAddToCart}
+                      onUpdateQuantity={handleUpdateCartQuantity}
                     />
                   </div>
                 ))}

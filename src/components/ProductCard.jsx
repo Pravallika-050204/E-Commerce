@@ -3,7 +3,7 @@ import { Heart, ShoppingCart, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ product, isWishlisted, onToggleWishlist, onAddToCart, autoOpenModal = false, onModalClose }) => {
+const ProductCard = ({ product, isWishlisted, cartItem, onToggleWishlist, onAddToCart, onUpdateQuantity, autoOpenModal = false, onModalClose }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(autoOpenModal);
@@ -84,13 +84,29 @@ const ProductCard = ({ product, isWishlisted, onToggleWishlist, onAddToCart, aut
             >
               ${Number(product.price).toFixed(2)}
             </h4>
-            <button
-              onClick={handleCart}
-              className="btn btn-primary d-flex align-items-center gap-1"
-              style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.85rem)', padding: '0.35rem 0.75rem' }}
-            >
-              <ShoppingCart size={14} /> Add
-            </button>
+            {cartItem ? (
+              <div className="d-flex align-items-center gap-2">
+                <button
+                  onClick={() => onUpdateQuantity(cartItem.id, cartItem.quantity - 1)}
+                  className="btn btn-outline-secondary d-flex align-items-center justify-content-center p-0"
+                  style={{ width: '28px', height: '28px', borderRadius: '50%' }}
+                >-</button>
+                <span className="fw-bold" style={{ width: '20px', textAlign: 'center', fontSize: '0.9rem' }}>{cartItem.quantity}</span>
+                <button
+                  onClick={() => onUpdateQuantity(cartItem.id, cartItem.quantity + 1)}
+                  className="btn btn-outline-secondary d-flex align-items-center justify-content-center p-0"
+                  style={{ width: '28px', height: '28px', borderRadius: '50%' }}
+                >+</button>
+              </div>
+            ) : (
+              <button
+                onClick={handleCart}
+                className="btn btn-primary d-flex align-items-center gap-1"
+                style={{ fontSize: 'clamp(0.72rem, 0.85vw, 0.85rem)', padding: '0.35rem 0.75rem' }}
+              >
+                <ShoppingCart size={14} /> Add
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -176,13 +192,29 @@ const ProductCard = ({ product, isWishlisted, onToggleWishlist, onAddToCart, aut
                 className="d-flex gap-3 mt-4 pt-3 border-top"
                 style={{ borderColor: 'var(--border-color) !important' }}
               >
-                <button
-                  onClick={handleCart}
-                  className="btn btn-primary d-flex align-items-center justify-content-center gap-2 flex-grow-1"
-                  style={{ fontSize: 'clamp(0.82rem, 1vw, 0.95rem)', padding: '0.55rem 1rem' }}
-                >
-                  <ShoppingCart size={18} /> Add to Cart
-                </button>
+                {cartItem ? (
+                  <div className="d-flex align-items-center gap-3 flex-grow-1 justify-content-center p-1 rounded-3" style={{ border: '1px solid var(--border-color)' }}>
+                    <button
+                      onClick={() => onUpdateQuantity(cartItem.id, cartItem.quantity - 1)}
+                      className="btn btn-light d-flex align-items-center justify-content-center rounded-circle shadow-sm"
+                      style={{ width: '36px', height: '36px' }}
+                    >-</button>
+                    <span className="fw-bold fs-5" style={{ width: '30px', textAlign: 'center' }}>{cartItem.quantity}</span>
+                    <button
+                      onClick={() => onUpdateQuantity(cartItem.id, cartItem.quantity + 1)}
+                      className="btn btn-light d-flex align-items-center justify-content-center rounded-circle shadow-sm"
+                      style={{ width: '36px', height: '36px' }}
+                    >+</button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleCart}
+                    className="btn btn-primary d-flex align-items-center justify-content-center gap-2 flex-grow-1"
+                    style={{ fontSize: 'clamp(0.82rem, 1vw, 0.95rem)', padding: '0.55rem 1rem' }}
+                  >
+                    <ShoppingCart size={18} /> Add to Cart
+                  </button>
+                )}
                 <button
                   onClick={handleWishlist}
                   className="btn d-flex align-items-center justify-content-center px-3"
