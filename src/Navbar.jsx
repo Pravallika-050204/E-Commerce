@@ -1,122 +1,223 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from './context/ThemeContext';
 import { useAuth } from './context/AuthContext';
-import { ShoppingCart, Heart, Sun, Moon, Search, LogOut } from 'lucide-react';
+import { ShoppingCart, Heart, Sun, Moon, LogOut } from 'lucide-react';
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [cartCount, setCartCount] = useState(0);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const { theme, toggleTheme }      = useTheme();
+  const { user, logout }            = useAuth();
+  const navigate                    = useNavigate();
+  const location                    = useLocation();
+  const [cartCount, setCartCount]   = useState(0);
+  const [catOpen, setCatOpen]       = useState(false);
+  const [profOpen, setProfOpen]     = useState(false);
+  const navCollapseRef              = useRef(null);
 
+  /* ── cart count ── */
   const fetchCartCount = () => {
     if (user) {
       fetch(`http://localhost:5000/carts?userId=${user.id}`)
-        .then(res => res.json())
-        .then(data => setCartCount(data.length));
+        .then(r => r.json())
+        .then(d => setCartCount(d.length));
+    } else {
+      setCartCount(0);
     }
   };
-
   useEffect(() => {
     fetchCartCount();
     window.addEventListener('cartUpdated', fetchCartCount);
     return () => window.removeEventListener('cartUpdated', fetchCartCount);
   }, [user, location.pathname]);
 
+  /* ── close hamburger menu (mobile) ── */
+  const closeMenu = () => {
+    if (navCollapseRef.current && navCollapseRef.current.classList.contains('show')) {
+      // Use Bootstrap's Collapse API to close
+      import('bootstrap').then(({ Collapse }) => {
+        const col = Collapse.getInstance(navCollapseRef.current);
+        if (col) col.hide();
+        else new Collapse(navCollapseRef.current, { toggle: false }).hide();
+      });
+    }
+    setCatOpen(false);
+    setProfOpen(false);
+  };
+
   const handleLogout = () => {
+    closeMenu();
     logout();
     navigate('/login');
   };
 
   return (
-    <nav className="navbar navbar-expand-lg sticky-top px-5 py-4">
+    <nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold" style={{ fontSize: '3rem' }} to="/">ShopSmart</Link>
-        
-        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-          <span className="navbar-toggler-icon" style={{ filter: 'invert(1)' }}></span>
+
+        {/* Brand */}
+        <Link className="navbar-brand" to="/" onClick={closeMenu}>ShopSmart</Link>
+
+        {/* ── Mobile toggler (hamburger) ── */}
+        <button
+          className="navbar-toggler border-0 ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+          aria-controls="navbarContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          style={{ outline: 'none', boxShadow: 'none' }}
+        >
+          {/* Custom hamburger lines — white on black navbar */}
+          <span style={{ display: 'flex', flexDirection: 'column', gap: '5px', width: '22px' }}>
+            <span style={{ display: 'block', height: '2px', backgroundColor: '#fff', borderRadius: '2px' }}></span>
+            <span style={{ display: 'block', height: '2px', backgroundColor: '#fff', borderRadius: '2px' }}></span>
+            <span style={{ display: 'block', height: '2px', backgroundColor: '#fff', borderRadius: '2px' }}></span>
+          </span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-4 ms-lg-5 fw-bold" style={{ fontSize: '2.5rem' }}>
-            <li className="nav-item"><Link className="nav-link px-3" to="/">Home</Link></li>
-            <li className="nav-item"><Link className="nav-link px-3" to="/products">Products</Link></li>
-            <li 
+        {/* ── Collapsible content ── */}
+        <div
+          className="collapse navbar-collapse"
+          id="navbarContent"
+          ref={navCollapseRef}
+        >
+
+          {/* Primary nav links */}
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+            <li className="nav-item">
+              <Link className="nav-link" to="/" onClick={closeMenu}>Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/products" onClick={closeMenu}>Products</Link>
+            </li>
+
+            {/* Categories dropdown */}
+            <li
               className="nav-item dropdown"
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              onMouseEnter={() => window.innerWidth >= 992 && setCatOpen(true)}
+              onMouseLeave={() => window.innerWidth >= 992 && setCatOpen(false)}
             >
-              <span className="nav-link dropdown-toggle px-3" role="button" style={{ cursor: 'pointer' }}>Categories</span>
-              <ul className={`dropdown-menu shadow border-0 rounded-3 mt-2 ${dropdownOpen ? 'show' : ''}`} style={{ transition: 'all 0.3s ease' }} onClick={() => setDropdownOpen(false)}>
-                <li><Link className="dropdown-item py-2 fs-4 fw-bold text-primary" to="/products">All Categories</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Footwear">Footwear</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Sneakers">Sneakers</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Bags">Bags</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Makeup">Makeup</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Plush Toys">Plush Toys</Link></li>
-                <li><Link className="dropdown-item py-2 fs-4" to="/category/Accessories">Accessories</Link></li>
+              <span
+                className="nav-link dropdown-toggle"
+                role="button"
+                style={{ cursor: 'pointer' }}
+                onClick={() => setCatOpen(!catOpen)}
+              >
+                Categories
+              </span>
+              <ul
+                className={`dropdown-menu shadow border-0 rounded-3 mt-1 ${catOpen ? 'show' : ''}`}
+                style={{ minWidth: '165px' }}
+              >
+                {[
+                  { label: 'All Products',  to: '/products'            },
+                  { label: 'Footwear',      to: '/category/Footwear'   },
+                  { label: 'Sneakers',      to: '/category/Sneakers'   },
+                  { label: 'Bags',          to: '/category/Bags'       },
+                  { label: 'Makeup',        to: '/category/Makeup'     },
+                  { label: 'Plush Toys',    to: '/category/Plush Toys' },
+                  { label: 'Accessories',   to: '/category/Accessories'},
+                ].map(item => (
+                  <li key={item.to}>
+                    <Link
+                      className={`dropdown-item ${item.label === 'All Products' ? 'fw-bold text-primary' : ''}`}
+                      to={item.to}
+                      onClick={closeMenu}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </li>
           </ul>
 
-          <div className="d-flex align-items-center gap-4">
-            <button onClick={toggleTheme} className="btn btn-link p-0 d-flex align-items-center gap-2 text-decoration-none" title="Toggle Theme" style={{ color: "#ffffff" }}>
-              <span className="fs-4 fw-medium">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
-              {theme === 'light' ? <Moon size={34} color="#ffffff" /> : <Sun size={34} color="#ffffff" />}
+          {/* ── Right-side actions ── */}
+          <div className="d-flex align-items-center flex-wrap gap-2 gap-lg-3 pb-2 pb-lg-0">
+
+            {/* Theme toggle */}
+            <button
+              onClick={() => { toggleTheme(); }}
+              className="navbar-toggle-btn"
+              title="Toggle Theme"
+            >
+              <span className="navbar-action-label">
+                {theme === 'light' ? 'Dark' : 'Light'}
+              </span>
+              {theme === 'light'
+                ? <Moon size={16} color="#fff" />
+                : <Sun  size={16} color="#fff" />}
             </button>
-            
+
+            {/* Wishlist + Cart */}
             {user && (
-              <div className="d-flex align-items-center gap-4">
-                <Link to="/wishlist" className="d-flex align-items-center gap-2 text-decoration-none text-white position-relative" title="Wishlist">
-                  <Heart size={34} color="#ffffff" />
-                  <span className="fs-4 fw-bold">Wishlist</span>
+              <div className="d-flex align-items-center gap-2 gap-lg-3">
+                <Link to="/wishlist" className="navbar-icon-btn" title="Wishlist" onClick={closeMenu}>
+                  <Heart size={16} color="#fff" />
+                  <span className="navbar-action-label">Wishlist</span>
                 </Link>
-                <Link to="/cart" className="d-flex align-items-center gap-2 text-decoration-none text-white position-relative" title="Cart">
+                <Link to="/cart" className="navbar-icon-btn" title="Cart" onClick={closeMenu}>
                   <div className="position-relative">
-                    <ShoppingCart size={34} color="#ffffff" />
+                    <ShoppingCart size={16} color="#fff" />
                     {cartCount > 0 && (
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger d-flex align-items-center justify-content-center" style={{ width: '22px', height: '22px', fontSize: '0.8rem', outline: '2px solid var(--bg-primary)' }}>
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger d-flex align-items-center justify-content-center cart-badge">
                         {cartCount}
                       </span>
                     )}
                   </div>
-                  <span className="fs-4 fw-bold">Cart</span>
+                  <span className="navbar-action-label">Cart</span>
                 </Link>
               </div>
             )}
 
+            {/* Profile dropdown or Login/SignUp */}
             {user ? (
-              <div 
-                className="d-flex align-items-center gap-4 ms-3 dropdown"
-                onMouseEnter={() => setProfileDropdownOpen(true)}
-                onMouseLeave={() => setProfileDropdownOpen(false)}
-                onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+              <div
+                className="position-relative"
+                onMouseEnter={() => window.innerWidth >= 992 && setProfOpen(true)}
+                onMouseLeave={() => window.innerWidth >= 992 && setProfOpen(false)}
               >
-                <div 
-                  className="rounded-circle d-flex align-items-center justify-content-center fw-bold bg-white text-dark border shadow-sm"
-                  style={{ width: '50px', height: '50px', fontSize: '24px', cursor: 'pointer' }}
+                <div
+                  className="profile-avatar rounded-circle d-flex align-items-center justify-content-center fw-bold bg-white text-dark border shadow-sm"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setProfOpen(!profOpen)}
+                  title={user.name}
                 >
                   {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                 </div>
-                <ul className={`dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2 ${profileDropdownOpen ? 'show' : ''}`} style={{ transition: 'all 0.3s ease', position: 'absolute', top: '100%', right: '0' }}>
-                  <li><h6 className="dropdown-header text-dark fs-5 fw-bold">{user.name}</h6></li>
-                  <li><hr className="dropdown-divider" /></li>
+                <ul
+                  className={`dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2 ${profOpen ? 'show' : ''}`}
+                  style={{ position: 'absolute', top: '100%', right: 0, minWidth: '150px', zIndex: 1100 }}
+                >
+                  <li><h6 className="dropdown-header fw-bold text-truncate">{user.name}</h6></li>
+                  <li><hr className="dropdown-divider m-0" /></li>
                   <li>
-                    <button className="dropdown-item py-2 fs-5 fw-bold text-danger d-flex align-items-center gap-2" onClick={handleLogout}>
-                      <LogOut size={20} /> Logout
+                    <button
+                      className="dropdown-item fw-bold text-danger d-flex align-items-center gap-2 py-2"
+                      onClick={handleLogout}
+                    >
+                      <LogOut size={14} /> Logout
                     </button>
                   </li>
                 </ul>
               </div>
             ) : (
-              <div className="d-flex gap-3 ms-2">
-                <Link to="/login" className="btn btn-outline-light px-5 py-3 fw-bold fs-4 rounded-pill">Login</Link>
-                <Link to="/register" className="btn btn-light px-5 py-3 fw-bold fs-4 text-dark rounded-pill">Sign Up</Link>
+              <div className="d-flex gap-2">
+                <Link
+                  to="/login"
+                  className="btn btn-outline-light navbar-btn-login"
+                  onClick={closeMenu}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="btn btn-light text-dark navbar-btn-login"
+                  onClick={closeMenu}
+                >
+                  Sign Up
+                </Link>
               </div>
             )}
           </div>

@@ -1,49 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import { Search } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-import { Carousel } from 'bootstrap';
+const fullText =
+  "Discover handpicked collections across makeup, footwear, bags, accessories and more — delivered to your door.";
+
+/* ── Category quick-links ─────────────────────────────── */
+const CATEGORIES = [
+  { label: '💄 Makeup', to: '/category/Makeup' },
+  { label: '👟 Sneakers', to: '/category/Sneakers' },
+  { label: '👠 Footwear', to: '/category/Footwear' },
+  { label: '👜 Bags', to: '/category/Bags' },
+  { label: '🧸 Plush Toys', to: '/category/Plush Toys' },
+  { label: '💍 Accessories', to: '/category/Accessories' },
+];
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [wishlists, setWishlists] = useState([]);
-  const navigate = useNavigate();
+  const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(0);
   const { user } = useAuth();
-  const categories = ['Footwear', 'Sneakers', 'Bags', 'Makeup', 'Plush Toys', 'Accessories'];
 
   useEffect(() => {
     fetch('http://localhost:5000/products?_limit=3')
-      .then(res => res.json())
+      .then(r => r.json())
       .then(data => setFeaturedProducts(data));
-      
+
     if (user) {
       fetch(`http://localhost:5000/wishlists?userId=${user.id}`)
-        .then(res => res.json())
+        .then(r => r.json())
         .then(data => setWishlists(data));
-    }
-    
-    // Explicitly initialize Bootstrap Carousel due to React DOM async mounting limits
-    const carouselElement = document.getElementById('homeCarousel');
-    if (carouselElement) {
-      new Carousel(carouselElement, {
-        interval: 1000,
-        ride: 'carousel'
-      });
     }
   }, [user]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+  useEffect(() => {
+    if (index < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + fullText.charAt(index));
+        setIndex(prev => prev + 1);
+      }, 25);
+
+      return () => clearTimeout(timeout);
     }
-  };
+  }, [index]);
 
   const handleToggleWishlist = async (product) => {
+    if (!user) return;
     const existing = wishlists.find(w => w.productId === product.id);
     if (existing) {
       await fetch(`http://localhost:5000/wishlists/${existing.id}`, { method: 'DELETE' });
@@ -52,7 +57,7 @@ const Home = () => {
       const res = await fetch('http://localhost:5000/wishlists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: user.id, productId: product.id, product })
+        body: JSON.stringify({ userId: user.id, productId: product.id, product }),
       });
       const data = await res.json();
       setWishlists([...wishlists, data]);
@@ -61,16 +66,16 @@ const Home = () => {
   };
 
   const handleAddToCart = async (product) => {
+    if (!user) return;
     const res = await fetch(`http://localhost:5000/carts?userId=${user.id}&productId=${product.id}`);
     const existing = await res.json();
-    
     if (existing.length > 0) {
       toast.error('Product is already in your cart!');
     } else {
       await fetch('http://localhost:5000/carts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: user.id, productId: product.id, quantity: 1, product })
+        body: JSON.stringify({ userId: user.id, productId: product.id, quantity: 1, product }),
       });
       window.dispatchEvent(new Event('cartUpdated'));
       toast.success(`${product.title} added to Cart!`);
@@ -78,55 +83,96 @@ const Home = () => {
   };
 
   return (
-    <div className="container-fluid px-0">
-      <div id="homeCarousel" className="carousel slide carousel-fade overflow-hidden border-0" data-bs-ride="carousel" data-bs-interval="2000">
-        <div className="carousel-inner">
-          <div className="carousel-item active" style={{ height: 'calc(100vh - 95px)', backgroundColor: 'var(--bg-card)' }}>
-            <img src="https://www.shutterstock.com/shutterstock/videos/1095304299/thumb/1.jpg?ip=x480" className="d-block w-100 h-100 object-fit-cover opacity-75" alt="Makeup" />
-            <div className="carousel-caption d-none d-md-block p-4 shadow-lg mb-5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', color: '#000000' }}>
-              <h2 className="fw-bold fs-1">Premium Makeup Collection</h2>
-              <p className="fs-4">Enhance your natural beauty with our exclusive cosmetics line.</p>
-            </div>
+    <div className="home-page">
+      <section className="hero-section">
+        <div className="hero-bg-blob" aria-hidden="true" />
+
+        <div className="hero-text">
+          <span className="hero-eyebrow">🛍️ New Season Arrivals</span>
+
+          <h1 className="hero-heading">
+            Shop Smart,<br />
+            <span className="hero-heading-accent">Live Better</span>
+          </h1>
+
+          <p className="hero-subtext">
+            {displayText}
+          </p>
+
+          <div className="hero-actions">
+            <Link to="/products" className="hero-btn-primary">
+              Shop Now →
+            </Link>
+            <Link to="/products" className="hero-btn-secondary">
+              Explore Categories
+            </Link>
           </div>
-          <div className="carousel-item" style={{ height: 'calc(100vh - 95px)', backgroundColor: 'var(--bg-card)' }}>
-            <img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MjU5MTl8MHwxfHNlYXJjaHwxfHx0ZWRkeSUyMGJlYXJ8ZW58MHx8fHwxNzMyMzE2ODIzfDA&ixlib=rb-4.0.3&q=80&w=1200" className="d-block w-100 h-100 object-fit-cover opacity-75" alt="Plushy" />
-            <div className="carousel-caption d-none d-md-block p-4 shadow-lg mb-5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', color: '#000000' }}>
-              <h2 className="fw-bold fs-1">Adorable Plushies</h2>
-              <p className="fs-4">Perfect companions for all ages. Soft, cuddly, and lovable.</p>
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <strong>50+</strong>
+              <span>Products</span>
             </div>
-          </div>
-          <div className="carousel-item" style={{ height: 'calc(100vh - 95px)', backgroundColor: 'var(--bg-card)' }}>
-            <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MjU5MTl8MHwxfHNlYXJjaHwxfHxydW5uaW5nJTIwc2hvZXN8ZW58MHx8fHwxNzMyMzE2OTAyfDA&ixlib=rb-4.0.3&q=80&w=1200" className="d-block w-100 h-100 object-fit-cover opacity-75" alt="Shoe" />
-            <div className="carousel-caption d-none d-md-block p-4 shadow-lg mb-5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)', color: '#000000' }}>
-              <h2 className="fw-bold fs-1">Modern Footwear</h2>
-              <p className="fs-4">Step up your style with our latest range of comfortable sneakers.</p>
+            <div className="hero-stat-divider" />
+            <div className="hero-stat">
+              <strong>6</strong>
+              <span>Categories</span>
+            </div>
+            <div className="hero-stat-divider" />
+            <div className="hero-stat">
+              <strong>Free</strong>
+              <span>Shipping</span>
             </div>
           </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon bg-dark rounded-circle p-4" aria-hidden="true" style={{ width: '4rem', height: '4rem' }}></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
-          <span className="carousel-control-next-icon bg-dark rounded-circle p-4" aria-hidden="true" style={{ width: '4rem', height: '4rem' }}></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
 
-      <div className="container-fluid px-5 py-5 mb-5 mt-5">
-        <div className="row g-5">
-          {featuredProducts.map(product => (
-            <div className="col-lg-4 col-md-6" key={product.id}>
-              <ProductCard 
-                product={product} 
-                isWishlisted={wishlists.some(w => w.productId === product.id)}
-                onToggleWishlist={handleToggleWishlist}
-                onAddToCart={handleAddToCart}
-              />
+        <div className="hero-image-wrap">
+          <div className="hero-image-ring" aria-hidden="true" />
+          <img
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&auto=format&fit=crop&q=90"
+            alt="Woman holding shopping bags"
+            className="hero-image"
+            loading="eager"
+          />
+          <div className="hero-badge">
+            <span className="hero-badge-icon">✨</span>
+            <div>
+              <div className="hero-badge-title">New Arrivals</div>
+              <div className="hero-badge-sub">Just dropped this week</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="category-strip">
+        <p className="category-strip-label">Browse by Category</p>
+        <div className="category-strip-pills">
+          {CATEGORIES.map(cat => (
+            <Link key={cat.to} to={cat.to} className="category-pill">
+              {cat.label}
+            </Link>
           ))}
         </div>
-      </div>
+      </section>
+
+      {featuredProducts.length > 0 && (
+        <section style={{ padding: '2rem var(--page-px) 3.5rem' }}>
+          <h2 className="section-heading mb-1">Featured Products</h2>
+          <p className="section-subtext mb-4">Hand-picked favourites just for you</p>
+          <div className="row g-3 g-md-4">
+            {featuredProducts.map(product => (
+              <div className="col-12 col-sm-6 col-lg-4" key={product.id}>
+                <ProductCard
+                  product={product}
+                  isWishlisted={wishlists.some(w => w.productId === product.id)}
+                  onToggleWishlist={handleToggleWishlist}
+                  onAddToCart={handleAddToCart}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

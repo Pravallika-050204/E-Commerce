@@ -26,9 +26,9 @@ function App() {
             background: '#333333', 
             color: '#ffffff', 
             fontWeight: 'bold', 
-            fontSize: '1.8rem', 
-            padding: '24px 32px',
-            maxWidth: '600px'
+            fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', 
+            padding: 'clamp(10px, 1.5vh, 16px) clamp(16px, 2vw, 24px)',
+            maxWidth: 'min(90vw, 500px)'
           } 
         }} 
       />
